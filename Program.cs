@@ -1,3 +1,4 @@
+using AccesoriosApp;
 using AccesoriosApp.Components;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -5,6 +6,12 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
+
+builder.Services.AddScoped(o => new HttpClient
+{
+    BaseAddress = new Uri("http://localhost:8080/")
+});
+builder.Services.AddScoped<UserServices>();
 
 var app = builder.Build();
 
